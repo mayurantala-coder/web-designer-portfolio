@@ -855,6 +855,21 @@ window.addEventListener('scroll', () => {
   document.querySelectorAll('.nav-link-item').forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#'+cur));
 }, { passive:true });
 
+/* close mobile menu on link click */
+const navLinksMobile = document.querySelectorAll('#navMenu .nav-link-item, #navMenu .nav-cta');
+const navMenuEl = document.getElementById('navMenu');
+navLinksMobile.forEach(l => {
+  l.addEventListener('click', () => {
+    if (navMenuEl.classList.contains('show')) {
+      let bsCollapse = bootstrap.Collapse.getInstance(navMenuEl);
+      if (!bsCollapse) {
+        bsCollapse = new bootstrap.Collapse(navMenuEl, { toggle: false });
+      }
+      bsCollapse.hide();
+    }
+  });
+});
+
 window.addEventListener('load', () => {
   gsap.registerPlugin(ScrollTrigger);
 
