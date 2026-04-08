@@ -53,7 +53,7 @@
   --accent-bg2:   rgba(255,255,255,0.10);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;}
 body{
   font-family:'Inter',sans-serif;
   background:var(--bg);
@@ -213,6 +213,7 @@ nav.scrolled{
   background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);
 }
 .avatar-monogram{
+  background-image: url('me.jpeg');background-repeat: no-repeat;background-size: cover;
   position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
 }
@@ -551,7 +552,7 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
           <div class="hero-avatar" aria-label="Mayur Antala avatar">
             <div class="avatar-monogram" aria-hidden="true">
               <span class="mono-letter">MA</span>
-              <span class="mono-tag">Frontend Developer</span>
+              <!-- <span class="mono-tag">Frontend Developer</span> -->
             </div>
           </div>
           <div class="hero-float-card fc1" aria-hidden="true">
@@ -827,7 +828,7 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
 <!-- FOOTER -->
 <footer role="contentinfo">
   <div class="container">
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <div class="d-flex align-items-center justify-content-center justify-content-sm-between flex-wrap gap-3">
       <div>Designed &amp; built by <strong style="color:var(--text2);font-weight:600">Mayur Antala</strong> &nbsp;·&nbsp; 2026</div>
       <div class="d-flex align-items-center gap-2" style="font-size:.78rem">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
