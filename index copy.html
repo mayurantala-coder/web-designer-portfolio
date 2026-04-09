@@ -450,15 +450,8 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
 .reveal-left{opacity:0;transform:translateX(-28px)}
 .reveal-right{opacity:0;transform:translateX(28px)}
 
-.offcanvas{
-  background-color: var(--bg2);
-}
-.btn-close{
-  background-color: var(--muted);
-}
-
 /* ── RESPONSIVE ── */
-@media(max-width:991px){.hero-img-wrap{margin-top:3.5rem}}
+@media(max-width:991px){.hero-img-wrap{margin-top:3.5rem}.timeline-item::before {left: -1.35rem;}}
 @media(max-width:768px){
   section{padding:4.5rem 0}
   .hero-avatar{width:270px;height:320px}
@@ -468,7 +461,6 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
   .skills-grid{grid-template-columns:repeat(auto-fill,minmax(108px,1fr))}
   .timeline{padding-left:1.5rem}
   .timeline-card{padding:1.5rem}
-  .timeline-item::before {left: -1.35rem;}
 }
 @media(max-width:767px){
   nav{
@@ -498,17 +490,11 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
             </div>
             Mayur<span class="nav-sep">/</span>Dev
           </a>
-
-          <!-- Hamburger Button (mobile only) -->
           <button class="navbar-toggler d-md-none" type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#mobileMenu"
-            aria-controls="mobileMenu"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
-          <!-- Desktop Links -->
           <div class="d-none d-md-flex align-items-center gap-1">
             <a href="#about" class="nav-link-item">About</a>
             <a href="#skills" class="nav-link-item">Skills</a>
@@ -519,50 +505,19 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
               Me</a>
           </div>
         </div>
-      </div>
-    </nav>
-
-    <!-- Offcanvas Menu (Left Side) -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu"
-      aria-labelledby="mobileMenuLabel"
-      data-bs-backdrop="true"
-      data-bs-scroll="false">
-
-      <!-- Header -->
-      <div class="offcanvas-header">
-        <a href="#hero" class="nav-brand" id="mobileMenuLabel">
-          <div class="nav-logo-box" aria-hidden="true">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
-              stroke="#000" stroke-width="2.6" stroke-linecap="round"
-              stroke-linejoin="round"><polyline
-                points="16 18 22 12 16 6" /><polyline
-                points="8 6 2 12 8 18" /></svg>
+        <div class="collapse d-md-none mt-3" id="navMenu">
+          <div class="d-flex flex-column gap-1 pb-3">
+            <a href="#about" class="nav-link-item">About</a>
+            <a href="#skills" class="nav-link-item">Skills</a>
+            <a href="#experience" class="nav-link-item">Experience</a>
+            <a href="#projects" class="nav-link-item">Projects</a>
+            <a href="#contact" class="nav-link-item">Contact</a>
+            <a href="mailto:Mayurantala777@gmail.com"
+              class="nav-cta mt-2 text-center d-block">Hire Me</a>
           </div>
-          Mayur<span class="nav-sep">/</span>Dev
-        </a>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-          aria-label="Close"></button>
-      </div>
-
-      <!-- Body / Links -->
-      <div class="offcanvas-body d-flex flex-column gap-2">
-        <a href="#about" class="nav-link-item oc-link"
-          data-bs-dismiss="offcanvas">About</a>
-        <a href="#skills" class="nav-link-item oc-link"
-          data-bs-dismiss="offcanvas">Skills</a>
-        <a href="#experience" class="nav-link-item oc-link"
-          data-bs-dismiss="offcanvas">Experience</a>
-        <a href="#projects" class="nav-link-item oc-link"
-          data-bs-dismiss="offcanvas">Projects</a>
-        <a href="#contact" class="nav-link-item oc-link"
-          data-bs-dismiss="offcanvas">Contact</a>
-
-        <div class="mt-auto pt-3 border-top">
-          <a href="mailto:Mayurantala777@gmail.com"
-            class="nav-cta d-block text-center">Hire Me</a>
         </div>
       </div>
-    </div>
+    </nav>
 
     <!-- HERO -->
     <section id="hero" aria-label="Introduction">
@@ -1313,30 +1268,6 @@ window.addEventListener('load', () => {
     imgWrap.addEventListener('mouseleave', () => gsap.to('.hero-avatar', { rotateY:0, rotateX:0, duration:.6, ease:'power2.out' }));
   }
 });
-</script>
-    <script>
-  document.querySelectorAll('.oc-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute('href');
-      const targetEl = document.querySelector(targetId);
-
-      // 1. Offcanvas band karo
-      const offcanvasEl = document.getElementById('mobileMenu');
-      const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasEl);
-      if (offcanvasInstance) offcanvasInstance.hide();
-
-      // 2. Offcanvas band hone ke baad section par scroll karo
-      offcanvasEl.addEventListener('hidden.bs.offcanvas', function scrollAfterClose() {
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth' });
-        }
-        // Listener ek baar hi chalega
-        offcanvasEl.removeEventListener('hidden.bs.offcanvas', scrollAfterClose);
-      });
-    });
-  });
 </script>
   </body>
 </html>
