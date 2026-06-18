@@ -479,6 +479,18 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
 }
 }
 </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1E7K790T1R">
+  </script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1E7K790T1R');
+</script>
   </head>
   <body>
 
@@ -1192,7 +1204,8 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
               <label for="cemail" class="visually-hidden">Your email</label>
               <input id="cemail" type="email" placeholder="Your email"
                 class="form-field" autocomplete="email">
-              <label for="cphone" class="visually-hidden">Your phone number</label>
+              <label for="cphone" class="visually-hidden">Your phone
+                number</label>
               <input id="cphone" type="tel" placeholder="Your phone number"
                 class="form-field" autocomplete="tel" inputmode="tel"
                 pattern="[0-9+\s\-()]{10,15}">
@@ -1200,7 +1213,8 @@ footer{padding:2rem 0;border-top:1px solid var(--border);font-size:.8rem;color:v
               <textarea id="cmsg" rows="4" placeholder="Your message..."
                 class="form-field"></textarea>
               <p id="contactFormStatus" class="section-sub mb-0" role="status"
-                aria-live="polite" style="font-size:.78rem;min-height:1.1rem"></p>
+                aria-live="polite"
+                style="font-size:.78rem;min-height:1.1rem"></p>
               <button type="button" id="sendContactBtn"
                 class="btn-primary-custom mt-1 justify-content-center border-0 w-100">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -1348,60 +1362,61 @@ window.addEventListener('load', () => {
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFapf9H3NpItqRA8c6GxD3m4zU7QyIycgTFEsMFQbzDlXf_eW_IQiKXt_MUWKp_S723w/exec';
 
 document.getElementById('sendContactBtn').addEventListener('click', async function () {
-  const statusEl = document.getElementById('contactFormStatus');
-  const name = document.getElementById('cname').value.trim();
-  const email = document.getElementById('cemail').value.trim();
-  const phone = document.getElementById('cphone').value.trim();
-  const message = document.getElementById('cmsg').value.trim();
-  const btn = this;
-  const phoneDigits = phone.replace(/\D/g, '');
+const statusEl = document.getElementById('contactFormStatus');
+const name = document.getElementById('cname').value.trim();
+const email = document.getElementById('cemail').value.trim();
+const phone = document.getElementById('cphone').value.trim();
+const message = document.getElementById('cmsg').value.trim();
+const btn = this;
+const phoneDigits = phone.replace(/\D/g, '');
 
-  if (!name || !email || !phone || !message) {
-    statusEl.textContent = 'Please fill in name, email, phone, and message.';
-    statusEl.style.color = 'var(--accent)';
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    statusEl.textContent = 'Please enter a valid email address.';
-    statusEl.style.color = 'var(--accent)';
-    return;
-  }
-  if (phoneDigits.length < 10 || phoneDigits.length > 15) {
-    statusEl.textContent = 'Please enter a valid phone number (10–15 digits).';
-    statusEl.style.color = 'var(--accent)';
-    return;
-  }
-  if (GOOGLE_SCRIPT_URL === 'PASTE_YOUR_WEB_APP_URL_HERE') {
-    statusEl.textContent = 'Setup pending: add your Google Script URL in index.html.';
-    statusEl.style.color = 'var(--accent)';
-    return;
-  }
+if (!name || !email || !phone || !message) {
+statusEl.textContent = 'Please fill in name, email, phone, and message.';
+statusEl.style.color = 'var(--accent)';
+return;
+}
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+statusEl.textContent = 'Please enter a valid email address.';
+statusEl.style.color = 'var(--accent)';
+return;
+}
+if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+statusEl.textContent = 'Please enter a valid phone number (10–15 digits).';
+statusEl.style.color = 'var(--accent)';
+return;
+}
+if (GOOGLE_SCRIPT_URL === 'PASTE_YOUR_WEB_APP_URL_HERE') {
+statusEl.textContent = 'Setup pending: add your Google Script URL in index.html.';
+statusEl.style.color = 'var(--accent)';
+return;
+}
 
-  btn.disabled = true;
-  statusEl.textContent = 'Sending…';
-  statusEl.style.color = 'var(--text2)';
+btn.disabled = true;
+statusEl.textContent = 'Sending…';
+statusEl.style.color = 'var(--text2)';
 
-  try {
-    const body = new URLSearchParams({ name, email, phone, message });
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString()
-    });
-    statusEl.textContent = 'Message sent! I will reply soon.';
-    statusEl.style.color = 'var(--green)';
-    document.getElementById('cname').value = '';
-    document.getElementById('cemail').value = '';
-    document.getElementById('cphone').value = '';
-    document.getElementById('cmsg').value = '';
-  } catch (err) {
-    statusEl.textContent = 'Something went wrong. Please try again or email me directly.';
-    statusEl.style.color = 'var(--accent)';
-  } finally {
-    btn.disabled = false;
-  }
+try {
+const body = new URLSearchParams({ name, email, phone, message });
+await fetch(GOOGLE_SCRIPT_URL, {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: body.toString()
 });
+statusEl.textContent = 'Message sent! I will reply soon.';
+statusEl.style.color = 'var(--green)';
+document.getElementById('cname').value = '';
+document.getElementById('cemail').value = '';
+document.getElementById('cphone').value = '';
+document.getElementById('cmsg').value = '';
+} catch (err) {
+statusEl.textContent = 'Something went wrong. Please try again or email me directly.';
+statusEl.style.color = 'var(--accent)';
+} finally {
+btn.disabled = false;
+}
+});
+
 </script>
   </body>
 </html>
